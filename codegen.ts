@@ -13,7 +13,7 @@ const config: CodegenConfig = {
       presetConfig: {
 				resolverTypesPath: "./types.generated.d.ts",
         typesPluginsConfig: {
-          contextType: '../../server/contracts#Context',
+          contextType: '../../contracts#Context',
           optionalResolveType: false,
           skipTypename: true,
           namingConvention: {

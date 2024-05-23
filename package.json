@@ -5,12 +5,12 @@
   "repository": "git@github.com:julianostroschon/reservation.git",
   "author": "julianostroschon <julianostroschon@gmail.com>",
   "scripts": {
-    "build": "rimraf ./build && tsc",
+    "build:clean": "rm -rf dist/ && yarn generate && yarn tsc",
+    "build": "yarn generate && yarn tsc",
     "start": "yarn build && node dist/index.js",
     "dev": "tsx --watch src/index.ts",
     "generate": "graphql-codegen"
   },
-  "type": "module",
   "license": "MIT",
   "devDependencies": {
     "@eddeee888/gcg-typescript-resolver-files": "^0.8.1",
