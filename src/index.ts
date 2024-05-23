@@ -1,4 +1,5 @@
+import { env } from "./infra/config";
 import { buildServer } from "./server";
 
 
-buildServer(3000)
+buildServer(env.port)
