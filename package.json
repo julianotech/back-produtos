@@ -7,10 +7,16 @@
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start": "yarn build && node dist/index.js",
-    "dev": "npx nodemon"
+    "dev": "tsx --watch src/index.ts",
+    "generate": "graphql-codegen"
   },
+  "type": "module",
   "license": "MIT",
   "devDependencies": {
+    "@eddeee888/gcg-typescript-resolver-files": "^0.8.1",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-resolvers": "^4.0.1",
     "@types/node": "^20.12.12",
     "nodemon": "^3.1.0",
     "rimraf": "^5.0.7",
@@ -18,5 +24,12 @@
     "tsx": "^4.11.0",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.10.0"
+  },
+  "dependencies": {
+    "graphql": "^16.8.1",
+    "graphql-yoga": "^5.3.1"
+  },
+  "resolutions": {
+    "jackspeak": "2.1.1"
   }
 }

@@ -1,1 +1,4 @@
-console.log('Hello world!')
+import { buildServer } from "./server";
+
+
+buildServer(3000)
