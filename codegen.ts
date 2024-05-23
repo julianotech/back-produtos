@@ -13,8 +13,8 @@ const config: CodegenConfig = {
       presetConfig: {
 				resolverTypesPath: "./types.generated.d.ts",
         typesPluginsConfig: {
-          // contextType: '../../server/context#Context',
-          optionalResolveType: true,
+          contextType: '../../server/contracts#Context',
+          optionalResolveType: false,
           skipTypename: true,
           namingConvention: {
             enumValues: 'change-case-all#upperCase',
@@ -23,5 +23,6 @@ const config: CodegenConfig = {
 			}
     },
   },
+  hooks: { afterAllFileWrite: ['prettier --write'] }
 };
 export default config;
