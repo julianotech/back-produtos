@@ -1,5 +1,5 @@
-import { dbConfig } from "@/infra/config";
-import { createConnection } from "@/infra/knexfile";
+import { dbConfig } from "../infra/config";
+import { createConnection } from "../infra/knexfile";
 import { Context } from "./contracts";
 
 export function constructCtx(): Context {
