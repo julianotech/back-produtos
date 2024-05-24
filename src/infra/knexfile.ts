@@ -1,8 +1,8 @@
-import knex, { Knex } from 'knex';
-import { resolve } from 'node:path';
+import knex, { Knex } from "knex";
+import { resolve } from "node:path";
 
-import { DBConfig } from './contracts';
-import { dbConfig } from './config';
+import { DBConfig } from "./contracts";
+import { dbConfig } from "./config";
 
 const buildConnectionConfig = (config: DBConfig): Knex.Config => {
   return {
@@ -17,25 +17,24 @@ const buildConnectionConfig = (config: DBConfig): Knex.Config => {
       ssl: true,
     },
     migrations: {
-      directory: resolve(__dirname, './migrations'),
-      extension: 'ts',
-      loadExtensions: ['.ts', '.js'],
+      directory: resolve(__dirname, "./migrations"),
+      extension: "ts",
+      loadExtensions: [".ts", ".js"],
     },
     seeds: {
-      directory: resolve(__dirname, './seeds'),
-      extension: 'ts',
-      loadExtensions: ['.js', '.ts'],
+      directory: resolve(__dirname, "./seeds"),
+      extension: "ts",
+      loadExtensions: [".js", ".ts"],
     },
   };
 };
 
-export function createConnection (config: DBConfig): Knex {
+export function createConnection(config: DBConfig): Knex {
   return knex(buildConnectionConfig(config));
-};
-
+}
 
 export default async function (): Promise<Knex.Config> {
   return {
     ...buildConnectionConfig(dbConfig),
   };
-};
+}

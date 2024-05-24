@@ -9,6 +9,7 @@
     "build": "yarn generate && yarn tsc",
     "start": "yarn build && node dist/index.js",
     "dev": "tsx --watch src/index.ts",
+    "format": "prettier --write \"src/**/*.ts\"",
     "generate": "graphql-codegen"
   },
   "license": "MIT",
