@@ -8,6 +8,7 @@
     "node": "20.0.0"
   },
   "scripts": {
+    "knex": "ts-node -r dotenv/config ./node_modules/.bin/knex --knexfile ./src/infra/knexfile.ts",
     "build:clean": "rm -rf dist/ && yarn generate && yarn tsc",
     "build": "yarn generate && yarn tsc",
     "start": "yarn build && node dist/index.js",
