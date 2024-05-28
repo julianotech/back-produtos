@@ -4,6 +4,6 @@ import { Context } from "./contracts";
 
 export function constructCtx(): Context {
   return {
-    database: createConnection(dbConfig),
+    database: createConnection(),
   };
 }
