@@ -16,7 +16,7 @@ function getFolderSettings(folder: string): FolderSettings {
   };
 }
 
-const connection: Knex.Config = {
+const config: Knex.Config = {
   client: dbConfig.DB_DRIVER,
   migrations: getFolderSettings("./migrations"),
   pool: { min: 0, max: 5, idleTimeoutMillis: 60000 },
@@ -32,7 +32,7 @@ const connection: Knex.Config = {
 }
 
 export function createConnection(): Knex {
-  return knex(connection);
+  return knex(config);
 }
 
-export default (): Knex.Config  => connection
+export default (): Knex.Config  => config
