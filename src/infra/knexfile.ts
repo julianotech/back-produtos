@@ -27,7 +27,6 @@ const config: Knex.Config = {
     database: dbConfig.DB_NAME,
     host: dbConfig.DB_HOST,
     port: dbConfig.DB_PORT,
-    ssl: true,
   },
 }
 
