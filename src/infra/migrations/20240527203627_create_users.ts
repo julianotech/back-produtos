@@ -8,6 +8,11 @@ export async function up(knex: Knex): Promise<void> {
     table.string('password').notNullable();
     table.string('administrator').notNullable();
   });
+
+  await knex('users').insert([
+    { id: 1, name: 'Admin', email: 'admin@example.com', password: 'password', administrator: 'true' },
+    { id: 2, name: 'User', email: 'user@example.com', password: 'password', administrator: 'false' },
+  ]);
 }
 
 export async function down(knex: Knex): Promise<void> {
