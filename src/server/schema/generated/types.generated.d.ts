@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { Context } from '../../contracts';
 export type Maybe<T> = T | null | undefined;
 export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -6,6 +7,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -15,8 +17,31 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Mutation = {
+  createProduct: Product;
+};
+
+
+export type MutationCreateProductArgs = {
+  name: Scalars['String']['input'];
+  price: Scalars['Int']['input'];
+  stock: Scalars['Int']['input'];
+};
+
+export type Product = {
+  name: Scalars['String']['output'];
+  price: Scalars['Int']['output'];
+  stock: Scalars['Int']['output'];
+};
+
 export type Query = {
   ping: Scalars['String']['output'];
+  products: Array<Product>;
+};
+
+
+export type QueryPingArgs = {
+  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -90,23 +115,43 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Query: ResolverTypeWrapper<{}>;
+  Mutation: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  Product: ResolverTypeWrapper<Product>;
+  Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Query: {};
+  Mutation: {};
   String: Scalars['String']['output'];
+  Int: Scalars['Int']['output'];
+  Product: Product;
+  Query: {};
   Boolean: Scalars['Boolean']['output'];
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  ping?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'name' | 'price' | 'stock'>>;
 };
 
-export type Resolvers<ContextType = any> = {
+export type ProductResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  stock?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  ping?: Resolver<ResolversTypes['String'], ParentType, ContextType, Partial<QueryPingArgs>>;
+  products?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType>;
+};
+
+export type Resolvers<ContextType = Context> = {
+  Mutation?: MutationResolvers<ContextType>;
+  Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 
