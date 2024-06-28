@@ -18,14 +18,8 @@ export type Scalars = {
 };
 
 export type Mutation = {
-  productAdd: Product;
   productDelete: Scalars['Boolean']['output'];
   productUpdate: Product;
-};
-
-
-export type MutationProductAddArgs = {
-  dados: ProductInput;
 };
 
 
@@ -162,7 +156,6 @@ export type ResolversParentTypes = {
 };
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  productAdd?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationProductAddArgs, 'dados'>>;
   productDelete?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationProductDeleteArgs, 'id'>>;
   productUpdate?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationProductUpdateArgs, 'dados' | 'id'>>;
 };

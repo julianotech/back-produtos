@@ -1,8 +1,11 @@
-import type { Product, QueryResolvers } from "./../../../generated/types.generated.d";
+import type {
+  Product,
+  QueryResolvers,
+} from "./../../../generated/types.generated.d";
 export const productGet: NonNullable<QueryResolvers["productGet"]> = async (
   _parent,
   { id },
-  { database},
+  { database },
 ) => {
   return database("products")
     .where({ id })
