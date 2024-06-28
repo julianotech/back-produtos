@@ -1,13 +1,23 @@
 type Product {
+  id: ID!
+  name: String!
+  price: Int!
+  stock: Int!
+}
+
+input ProductInput {
   name: String!
   price: Int!
   stock: Int!
 }
 
 type Mutation {
-  createProduct(name: String!, price: Int!, stock: Int!): Product!
+  productAdd(dados: ProductInput!): Product!
+  productUpdate(id: ID!, dados: ProductInput!): Product!
+  productDelete(id: ID!): Boolean!
 }
 
 type Query {
-  products: [Product!]!
+  productLoad: [Product!]!
+  productGet(id: ID!): Product!
 }
