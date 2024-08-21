@@ -1,4 +1,4 @@
-import { env } from "./infra/config";
-import { buildServer } from "./server";
+import { env } from './infra/config';
+import { buildServer } from './server';
 
 buildServer(env.port);

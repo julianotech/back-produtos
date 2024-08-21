@@ -1,6 +1,6 @@
-import { createYoga } from "graphql-yoga";
-import { createServer } from "http";
-import schema from "./schema/generated";
+import { createYoga } from 'graphql-yoga';
+import { createServer } from 'http';
+import schema from './schema/generated';
 
 export function buildServer(port: number): void {
   const yoga = createYoga(schema);

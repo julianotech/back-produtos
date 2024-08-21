@@ -1,7 +1,7 @@
-import knex, { Knex } from "knex";
-import { resolve } from "node:path";
+import knex, { Knex } from 'knex';
+import { resolve } from 'node:path';
 
-import { dbConfig } from "./config";
+import { dbConfig } from './config';
 
 interface FolderSettings {
   loadExtensions: string[];
@@ -11,16 +11,16 @@ interface FolderSettings {
 function getFolderSettings(folder: string): FolderSettings {
   return {
     directory: resolve(__dirname, folder),
-    loadExtensions: [".js", ".ts"],
-    extension: "ts",
+    loadExtensions: ['.js', '.ts'],
+    extension: 'ts',
   };
 }
 
 const config: Knex.Config = {
   client: dbConfig.DB_DRIVER,
-  migrations: getFolderSettings("./migrations"),
   pool: { min: 0, max: 5, idleTimeoutMillis: 60000 },
-  seeds: getFolderSettings("./seeds"),
+  migrations: getFolderSettings('./migrations'),
+  seeds: getFolderSettings('./seeds'),
   connection: {
     password: dbConfig.DB_PASSWORD,
     user: dbConfig.DB_USERNAME,
@@ -28,10 +28,10 @@ const config: Knex.Config = {
     host: dbConfig.DB_HOST,
     port: dbConfig.DB_PORT,
   },
-}
+};
 
 export function createConnection(): Knex {
   return knex(config);
 }
 
-export default (): Knex.Config  => config
+export default (): Knex.Config => config;
