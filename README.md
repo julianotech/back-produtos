@@ -31,14 +31,18 @@ DB_PORT=55432
 docker-compose up -d
 ```
 
-5. Run the server
+5. Create the database
+```bash
+yarn prepare
+```
+6. Run the server
 
 ```bash
 yarn start
 ```
 
-6. Open the GraphQL Playground
+7. Open the GraphQL Playground
 
 ```bash
-http://localhost:4000/graphql
+http://0.0.0.0:30000/graphql
 ```
