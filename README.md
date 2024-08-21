@@ -33,7 +33,7 @@ docker-compose up -d
 
 5. Create the database
 ```bash
-yarn prepare
+yarn db:prepare
 ```
 6. Run the server
 
