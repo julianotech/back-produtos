@@ -1,1 +1,4 @@
 node_modules/*
+src/server/schema/generated/resolvers.generated.ts
+src/server/schema/generated/typeDefs.generated.ts
+src/server/schema/generated/types.generated.ts
