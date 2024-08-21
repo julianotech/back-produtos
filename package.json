@@ -1,8 +1,7 @@
 {
-  "name": "reservation",
+  "name": "backend-default",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:julianostroschon/reservation.git",
   "author": "julianostroschon <julianostroschon@gmail.com>",
   "engines": {
     "node": "20.0.0"
@@ -23,16 +22,17 @@
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/typescript": "^4.0.1",
     "@graphql-codegen/typescript-resolvers": "^4.0.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/knex": "^0.16.1",
     "@types/node": "^20.12.12",
     "nodemon": "^3.1.0",
-    "rimraf": "^5.0.7",
     "ts-node": "^10.9.2",
     "tsx": "^4.11.0",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.10.0"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.23.0",
     "graphql-yoga": "^5.3.1",
