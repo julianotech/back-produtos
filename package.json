@@ -4,7 +4,7 @@
   "main": "index.js",
   "author": "julianostroschon <julianostroschon@gmail.com>",
   "engines": {
-    "node": "22.7.0"
+    "node": ">=22.7.0"
   },
   "scripts": {
     "knex": "ts-node -r dotenv/config ./node_modules/.bin/knex --knexfile ./src/infra/knexfile.ts",
