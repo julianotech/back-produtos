@@ -11,9 +11,9 @@
     "build:clean": "rm -rf dist/ && yarn generate && yarn tsc",
     "build": "yarn generate && yarn tsc",
     "start": "yarn build && node dist/index.js",
-    "dev": "yarn generate && tsx --watch src/index.ts",
+    "dev": "yarn generate && tsx --watch src/index.ts --trace-deprecation",
     "format": "prettier --write \"src/**/*.ts\"",
-    "prepare": "husky install",
+    "prepare": "husky ./",
     "db:prepare": "yarn knex migrate:latest",
     "generate": "graphql-codegen"
   },
