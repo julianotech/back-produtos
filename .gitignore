@@ -5,7 +5,7 @@ dist
 
 #Generated files
 src/server/schema/generated/resolvers.generated.ts
-src/server/schema/generated/typeDefs.generated.ts
+src/server/schema/generated/*.generated.ts
 src/server/schema/generated/types.generated.ts
 
 !src/server/schema/generated/index.ts
