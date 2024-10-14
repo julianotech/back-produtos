@@ -10,7 +10,7 @@ export const auth: NonNullable<MutationResolvers['auth']> = async (
   const userData = await database('users').where('email', email).first();
 
   const validPassword = await comparePassword(password, userData.password);
-  if (validPassword) {
+  if (!validPassword) {
     return handleError(`Credentials not valid`, 'CREDENTIALS_NOT_VALID');
   }
 
