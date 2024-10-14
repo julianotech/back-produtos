@@ -11,6 +11,8 @@
     "dev": "yarn generate && tsx --watch src/index.ts --trace-deprecation",
     "format": "prettier --write \"src/**/*.ts\"",
     "prepare": "husky ./",
+    "seed:make": "yarn knex seed:make",
+    "seed:run": "yarn knex seed:run",
     "db:prepare": "yarn knex migrate:latest",
     "generate": "graphql-codegen"
   },
