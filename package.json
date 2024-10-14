@@ -1,11 +1,8 @@
 {
-  "name": "backend-default",
+  "name": "backend-produtos",
   "version": "1.0.0",
   "main": "index.js",
   "author": "julianostroschon <julianostroschon@gmail.com>",
-  "engines": {
-    "node": ">=22.7.0"
-  },
   "scripts": {
     "knex": "ts-node -r dotenv/config ./node_modules/.bin/knex --knexfile ./src/infra/knexfile.ts",
     "build:clean": "rm -rf dist/ && yarn generate && yarn tsc",
@@ -26,10 +23,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/knex": "^0.16.1",
     "@types/node": "^20.12.12",
-    "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
-    "tsx": "^4.11.0",
-    "typescript": "^5.4.5",
+    "typescript": "^5.6.3",
     "typescript-eslint": "^7.10.0"
   },
   "dependencies": {

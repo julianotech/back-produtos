@@ -1,4 +1,4 @@
-# Backend - DEFAULT
+# Backend - PRODUTOS
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ yarn install
 DB_NAME=root
 DB_USER=root
 DB_PASSWORD=root
-DB_PORT=55432
+DB_PORT=5432
 ```
 
 4. Start the database
