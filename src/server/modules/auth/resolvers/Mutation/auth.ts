@@ -11,7 +11,7 @@ export const auth: NonNullable<MutationResolvers['auth']> = async (
 
   const validPassword = await comparePassword(password, userData.password);
   if (validPassword) {
-    return handleError(`Credentials not valid`,'CREDENTIALS_NOT_VALID')
+    return handleError(`Credentials not valid`, 'CREDENTIALS_NOT_VALID');
   }
 
   const token = generateToken({
