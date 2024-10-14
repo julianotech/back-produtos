@@ -20,6 +20,9 @@ export type Incremental<T> =
   | {
       [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
     };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
+  [P in K]-?: NonNullable<T[P]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string | number };
@@ -29,14 +32,71 @@ export type Scalars = {
   Float: { input: number; output: number };
 };
 
+export type AuthPayload = {
+  token: Scalars['String']['output'];
+};
+
+export type Mutation = {
+  auth: AuthPayload;
+  productCreate: Product;
+  productDel: Product;
+  productUpdate: Product;
+};
+
+export type MutationAuthArgs = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+export type MutationProductCreateArgs = {
+  name: Scalars['String']['input'];
+  price: Scalars['Float']['input'];
+  quantity: Scalars['Int']['input'];
+};
+
+export type MutationProductDelArgs = {
+  id: Scalars['ID']['input'];
+};
+
+export type MutationProductUpdateArgs = {
+  data: ProductUpdateInput;
+  id: Scalars['ID']['input'];
+};
+
+export type Product = {
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  price: Scalars['Float']['output'];
+  quantity: Scalars['Int']['output'];
+  stock: Scalars['Int']['output'];
+};
+
+export type ProductAddInput = {
+  name: Scalars['String']['input'];
+  price: Scalars['Float']['input'];
+  quantity: Scalars['Int']['input'];
+};
+
+export type ProductUpdateInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['Float']['input']>;
+  quantity?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Query = {
   ping: Scalars['String']['output'];
+  product: Product;
+  products: Array<Product>;
   user: User;
   users: Array<User>;
 };
 
 export type QueryPingArgs = {
   id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryProductArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type User = {
@@ -154,20 +214,87 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Query: ResolverTypeWrapper<{}>;
+  AuthPayload: ResolverTypeWrapper<AuthPayload>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Mutation: ResolverTypeWrapper<{}>;
+  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+  Product: ResolverTypeWrapper<Product>;
+  ProductAddInput: ProductAddInput;
+  ProductUpdateInput: ProductUpdateInput;
+  Query: ResolverTypeWrapper<{}>;
   User: ResolverTypeWrapper<User>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
-  ID: ResolverTypeWrapper<Scalars['ID']['output']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Query: {};
+  AuthPayload: AuthPayload;
   String: Scalars['String']['output'];
+  Mutation: {};
+  Float: Scalars['Float']['output'];
+  Int: Scalars['Int']['output'];
+  ID: Scalars['ID']['output'];
+  Product: Product;
+  ProductAddInput: ProductAddInput;
+  ProductUpdateInput: ProductUpdateInput;
+  Query: {};
   User: User;
   Boolean: Scalars['Boolean']['output'];
-  ID: Scalars['ID']['output'];
+};
+
+export type AuthPayloadResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes['AuthPayload'] = ResolversParentTypes['AuthPayload'],
+> = {
+  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
+> = {
+  auth?: Resolver<
+    ResolversTypes['AuthPayload'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAuthArgs, 'email' | 'password'>
+  >;
+  productCreate?: Resolver<
+    ResolversTypes['Product'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationProductCreateArgs, 'name' | 'price' | 'quantity'>
+  >;
+  productDel?: Resolver<
+    ResolversTypes['Product'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationProductDelArgs, 'id'>
+  >;
+  productUpdate?: Resolver<
+    ResolversTypes['Product'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationProductUpdateArgs, 'data' | 'id'>
+  >;
+};
+
+export type ProductResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes['Product'] = ResolversParentTypes['Product'],
+> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  stock?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<
@@ -180,6 +307,17 @@ export type QueryResolvers<
     ParentType,
     ContextType,
     Partial<QueryPingArgs>
+  >;
+  product?: Resolver<
+    ResolversTypes['Product'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryProductArgs, 'id'>
+  >;
+  products?: Resolver<
+    Array<ResolversTypes['Product']>,
+    ParentType,
+    ContextType
   >;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
@@ -199,6 +337,9 @@ export type UserResolvers<
 };
 
 export type Resolvers<ContextType = Context> = {
+  AuthPayload?: AuthPayloadResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
+  Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
