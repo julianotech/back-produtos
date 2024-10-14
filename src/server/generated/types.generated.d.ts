@@ -31,6 +31,7 @@ export type Scalars = {
 
 export type Query = {
   ping: Scalars['String']['output'];
+  user: User;
   users: Array<User>;
 };
 
@@ -180,6 +181,7 @@ export type QueryResolvers<
     ContextType,
     Partial<QueryPingArgs>
   >;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
 };
 
