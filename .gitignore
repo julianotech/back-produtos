@@ -4,8 +4,9 @@ dist
 .env
 
 #Generated files
-src/server/schema/generated/resolvers.generated.ts
-src/server/schema/generated/*.generated.ts
-src/server/schema/generated/types.generated.ts
+src/server/generated/resolvers.generated.ts
+src/server/generated/typeDefs.generated.ts
+src/server/generated/types.generated.d.ts
+src/server/generated/*generated.ts
 
-!src/server/schema/generated/index.ts
+!src/server/generated/index.ts
