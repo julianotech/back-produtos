@@ -5,8 +5,8 @@ type Product {
   stock: Int!
 }
 
-input ProductAddInput {
-  quantity: Int!
+input ProductCreateInput {
+  stock: Int!
   name: String!
   price: Float!
 }
@@ -14,11 +14,11 @@ input ProductAddInput {
 input ProductUpdateInput {
   name: String
   price: Float
-  quantity: Int
+  stock: Int
 }
 
 type Mutation {
-  productCreate(name: String!, price: Float!, quantity: Int!): Product!
+  productCreate(data: ProductCreateInput!): Product!
   productUpdate(id: ID!, data: ProductUpdateInput!): Product!
   productDel(id: ID!): Product!
 }

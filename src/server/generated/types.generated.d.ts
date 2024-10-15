@@ -36,9 +36,7 @@ export type MutationAuthArgs = {
 
 
 export type MutationProductCreateArgs = {
-  name: Scalars['String']['input'];
-  price: Scalars['Float']['input'];
-  quantity: Scalars['Int']['input'];
+  data: ProductCreateInput;
 };
 
 
@@ -59,16 +57,16 @@ export type Product = {
   stock: Scalars['Int']['output'];
 };
 
-export type ProductAddInput = {
+export type ProductCreateInput = {
   name: Scalars['String']['input'];
   price: Scalars['Float']['input'];
-  quantity: Scalars['Int']['input'];
+  stock: Scalars['Int']['input'];
 };
 
 export type ProductUpdateInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['Float']['input']>;
-  quantity?: InputMaybe<Scalars['Int']['input']>;
+  stock?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type Query = {
@@ -171,11 +169,11 @@ export type ResolversTypes = {
   AuthPayload: ResolverTypeWrapper<AuthPayload>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
-  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
-  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Product: ResolverTypeWrapper<Product>;
-  ProductAddInput: ProductAddInput;
+  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  ProductCreateInput: ProductCreateInput;
   ProductUpdateInput: ProductUpdateInput;
   Query: ResolverTypeWrapper<{}>;
   User: ResolverTypeWrapper<User>;
@@ -187,11 +185,11 @@ export type ResolversParentTypes = {
   AuthPayload: AuthPayload;
   String: Scalars['String']['output'];
   Mutation: {};
-  Float: Scalars['Float']['output'];
-  Int: Scalars['Int']['output'];
   ID: Scalars['ID']['output'];
   Product: Product;
-  ProductAddInput: ProductAddInput;
+  Float: Scalars['Float']['output'];
+  Int: Scalars['Int']['output'];
+  ProductCreateInput: ProductCreateInput;
   ProductUpdateInput: ProductUpdateInput;
   Query: {};
   User: User;
@@ -205,7 +203,7 @@ export type AuthPayloadResolvers<ContextType = Context, ParentType extends Resol
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   auth?: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationAuthArgs, 'email' | 'password'>>;
-  productCreate?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationProductCreateArgs, 'name' | 'price' | 'quantity'>>;
+  productCreate?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationProductCreateArgs, 'data'>>;
   productDel?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationProductDelArgs, 'id'>>;
   productUpdate?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationProductUpdateArgs, 'data' | 'id'>>;
 };

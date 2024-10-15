@@ -1,6 +1,8 @@
 import type { MutationResolvers } from './../../../../generated/types.generated.d';
 export const productCreate: NonNullable<
   MutationResolvers['productCreate']
-> = async (_parent, _arg, _ctx) => {
-  /* Implement Mutation.productCreate resolver logic here */
+> = async (_parent, { data }, { database }) => {
+  return database('products').insert(data).returning('*').then(([res]) => res); 
+  // console.log({ qb: qb.toString() });
+  return qb
 };

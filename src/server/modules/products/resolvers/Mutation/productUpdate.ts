@@ -1,6 +1,6 @@
 import type { MutationResolvers } from './../../../../generated/types.generated.d';
 export const productUpdate: NonNullable<
   MutationResolvers['productUpdate']
-> = async (_parent, _arg, _ctx) => {
-  /* Implement Mutation.productUpdate resolver logic here */
+> = async (_parent, { id, data }, { database }) => {
+  return database('products').where({ id }).update(data).returning('*').then(([res]) => res);
 };
